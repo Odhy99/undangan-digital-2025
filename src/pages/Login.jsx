@@ -52,10 +52,10 @@ const Login = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Card className="w-full max-w-3xl glass-effect text-white border-none shadow-2xl">
+                    <Card className="w-full max-w-xl glass-effect text-white border-none shadow-2xl">
                         <CardHeader className="text-center">
                             <CardTitle className="text-3xl font-sans">Login</CardTitle>
-                            <CardDescription className="text-gray-300">Masuk untuk melanjutkan</CardDescription>
+                            <CardDescription className="text-gray-300">Masukkan username dan kata sandi yang benar</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <form onSubmit={handleSubmit} className="space-y-4">
