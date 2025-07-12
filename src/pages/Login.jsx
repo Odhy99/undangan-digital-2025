@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -6,12 +6,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
-import { LogIn } from 'lucide-react';
+import { LogIn, Loader2 } from 'lucide-react';
 
 const Login = () => {
     const { toast } = useToast();
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const username = e.target.username.value;
         const password = e.target.password.value;
         try {
@@ -37,6 +39,8 @@ const Login = () => {
                 description: "Terjadi kesalahan koneksi.",
                 variant: "destructive"
             });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -67,8 +71,17 @@ const Login = () => {
                                     <Label htmlFor="password">Password</Label>
                                     <Input id="password" name="password" type="password" placeholder="••••••••" className="bg-white/10" />
                                 </div>
-                                <Button type="submit" className="w-full pulse-glow bg-white text-black hover:bg-gray-200">
-                                    <LogIn className="mr-2 h-4 w-4" /> Masuk
+                                <Button type="submit" className="w-full pulse-glow bg-white text-black hover:bg-gray-200 flex items-center justify-center" disabled={loading}>
+                                    {loading ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Memproses...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LogIn className="mr-2 h-4 w-4" /> Masuk
+                                        </>
+                                    )}
                                 </Button>
                             </form>
                         </CardContent>
